@@ -1,11 +1,13 @@
 import random
 from n_queens.Board import Board as Board
+from n_queens.Stats import Stats
 
-board_size = 6
-population_size = 10
-no_of_parents = 4  # should be an even number, and I can't be razzed to put in a proper check
+board_size = 9
+population_size = 20
+no_of_parents = 10  # should be an even number, and I can't be razzed to put in a proper check
 children_per_parent = 2
-attempts = 20000
+mutation_probability = 0.001
+attempts = 1000000
 
 
 def generate_board(length):
@@ -53,6 +55,9 @@ def make_babies(p1, p2, pivot):
     k1_state = p1[0:pivot] + p2[pivot:]
     k2_state = p2[0:pivot] + p1[pivot:]
 
+    k1_state = mutate(k1_state)
+    k2_state = mutate(k2_state)
+
     k1 = Board(k1_state)
     k2 = Board(k2_state)
     return k1, k2
@@ -73,14 +78,25 @@ def breed(parents):
     return kids
 
 
+def mutate(state):
+    if random.random() < mutation_probability:
+        l = random.randint(0, board_size-1)
+        state = list(state)
+        state[l] = str(random.randint(0, board_size - 1))
+        state = "".join(state)
+    return state
+
+
 def find_solution():
     attempt = 0
     population = gen_population()
+    stats = Stats(board_size, Board.max_attacking_pairs(board_size))
+
     while attempt < attempts:
         rankings = get_rankings(population)
         parents = get_parents(rankings, population)
         population = breed(parents)
-        print("new population", *population)
+        stats.record(population)
         attempt += 1
     print("ran %s attempts, now exiting" % attempt)
 

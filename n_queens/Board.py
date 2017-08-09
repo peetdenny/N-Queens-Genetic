@@ -21,6 +21,7 @@ class Board:
                     "A board of size %s x %s can't contain a row index of value %s" % (self.size, self.size, s))
         self.state = initial_state
         self.eligibility = 0
+        self.fitness = Board.max_attacking_pairs(self.size) - self.count_attacking_pairs()
 
     def count_attacking_pairs(self):
         # cols - this configuration type doesn't allow attacking within a column, so zero
@@ -35,13 +36,10 @@ class Board:
                 if abs(i - j) == abs(int(self.state[i]) - int(self.state[j])):
                     diags += 1
         count = rows + diags
-        if count is 0:
-            print("Found solution to a board of size", self.size, self.state)
-            exit()
         return count
 
     def fitness_function(self):
-        return Board.max_attacking_pairs(self.size) - self.count_attacking_pairs()
+        return self.fitness
 
     def set_eligibility(self, e):
         self.eligibility = e
