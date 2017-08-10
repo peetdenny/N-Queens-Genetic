@@ -1,4 +1,4 @@
-#Solving N-Queens with Genetic Algorithms
+# Solving N-Queens with Genetic Algorithms
 
 Solves the N-Queens problem where you have to place n chess queens on a board of n x n dimensions such that no queen is attacking any other.
 There is no solution to N-Queens where n is below 4, and the board encoding mechanism chosen here only allows up to 10 columns.
@@ -32,7 +32,7 @@ By calculating this fitness function, we come up with an eligibility score which
  
  The children from the top-ranking parents then become the population for the next generation
  
- ##Mutation
+ ## Mutation
  I discovered that without this mutation step, the population tends to stabilise in identical, but poor-scoring children. Since they're identical, their kids are identical.
  So on occasion, we randomly select a chromosome or two to mutate.
  For the mutation, we selected to occasionally switch around two randomly-selected digits, as described in this paper
