@@ -1,5 +1,9 @@
 #Solving N-Queens with Genetic Algorithms
 
+Solves the N-Queens problem where you have to place n chess queens on a board of n x n dimensions such that no queen is attacking any other.
+There is no solution to N-Queens where n is below 4, and the board encoding mechanism chosen here only allows up to 10 columns.
+But for n between 4 and 10, we're golden. 
+
 The genetic algorithm is made of three steps.
 
 * Selection 
@@ -33,4 +37,5 @@ By calculating this fitness function, we come up with an eligibility score which
  So on occasion, we randomly select a chromosome or two to mutate.
  For the mutation, we selected to occasionally switch around two randomly-selected digits, as described in this paper
  http://research.ijcaonline.org/volume122/number12/pxc3905005.pdf
- 
+ However, this implementation didn't seem to add as much benefit as just randomly mutating a single digit.
+ The probability of mutation performed best at 80%, which was surprisingly high.

@@ -6,7 +6,7 @@ board_size = 9
 population_size = 20
 no_of_parents = 10  # should be an even number, and I can't be razzed to put in a proper check
 children_per_parent = 2
-mutation_probability = 0.001
+mutation_probability = 0.8
 attempts = 1000000
 
 
